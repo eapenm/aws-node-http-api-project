@@ -5,7 +5,7 @@ const fetchTodos = async (event) => {
   let todos;
   
   try {
-    const results = await dynamodb.scan ({TableName: "TododTable"}).promise();
+    const results = await dynamodb.scan ({TableName: "TodoTable"}).promise();
     todos = results.Items
   } catch (error) {
     console.log(error)

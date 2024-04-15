@@ -3,7 +3,7 @@ const AWS = require("aws-sdk")
 
 const addTodo = async (event) => {
   const { todo } = JSON.parse(event.body);
-  const createdAt = new Date();
+  const createdAt = new Date().toISOString();
   const id=v4();
   const dynamodb = new AWS.DynamoDB.DocumentClient()
   console.log("This is an id",id)
@@ -15,10 +15,10 @@ const addTodo = async (event) => {
     complete: false
   }
   
-  dynamodb.put({
+  await dynamodb.put({
     TableName: "TodoTable",
     Item: newTodo
-  })
+  }).promise()
 
   return {
     statusCode: 200,
